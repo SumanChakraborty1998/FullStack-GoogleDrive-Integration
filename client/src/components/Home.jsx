@@ -10,13 +10,10 @@ export const Home = ({ setData }) => {
   const [openPicker, authResponse] = useDrivePicker();
   const [isLoggedin, setIsLoggedIn] = useState(false);
 
-  const clientId =
-    "568745200436-sdv29b113ffm7uqe05ftovq1juie7mkj.apps.googleusercontent.com";
-
   const handleOpenDrive = () => {
     openPicker({
-      clientId: clientId,
-      developerKey: "AIzaSyCrL9nZBf83pMV7BlTCVWxcap2cCPTA_MA",
+      clientId: process.env.REACT_APP_CLIENT_ID,
+      developerKey: process.env.REACT_APP_DEVELOPER_KEY,
       viewId: "DOCS",
       showUploadView: true,
       showUploadFolders: true,
@@ -45,7 +42,7 @@ export const Home = ({ setData }) => {
   useEffect(() => {
     const start = () => {
       gapi.client.init({
-        clientId: clientId,
+        clientId: process.env.REACT_APP_CLIENT_ID,
         scope: "",
       });
     };
@@ -66,7 +63,7 @@ export const Home = ({ setData }) => {
       >
         {isLoggedin ? (
           <GoogleLogout
-            clientId={clientId}
+            clientId={process.env.REACT_APP_CLIENT_ID}
             buttonText="Logout - Google Drive"
             icon={true}
             // isSignedIn={true}
@@ -75,7 +72,7 @@ export const Home = ({ setData }) => {
         ) : (
           <GoogleLogin
             // clientId="568745200436-sdv29b113ffm7uqe05ftovq1juie7mkj.apps.googleusercontent.com"
-            clientId={clientId}
+            clientId={process.env.REACT_APP_CLIENT_ID}
             buttonText="Connect to Google Drive"
             onSuccess={(res) => successResponseFromGoogle(res)}
             onFailure={(res) => failureResponseFromGoogle(res)}
