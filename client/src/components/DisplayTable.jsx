@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export const DisplayTable = ({ data, setData }) => {
+export const DisplayTable = ({ data, setData, isLoggedin }) => {
   console.log(data);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -88,7 +88,7 @@ export const DisplayTable = ({ data, setData }) => {
       <>
         {isError ? (
           <div>Something went wrong</div>
-        ) : (
+        ) : isLoggedin ? (
           <TableContainer
             component={Paper}
             sx={{
@@ -117,32 +117,34 @@ export const DisplayTable = ({ data, setData }) => {
               </TableBody>
             </Table>
           </TableContainer>
-        )}
+        ) : null}
 
-        <Stack
-          spacing={2}
-          direction="row"
-          sx={{
-            marginTop: "50px",
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => setData(undefined)}
+        {isLoggedin ? (
+          <Stack
+            spacing={2}
+            direction="row"
+            sx={{
+              marginTop: "50px",
+              justifyContent: "center",
+              display: "flex",
+            }}
           >
-            Remove Selected Files
-          </Button>
-          <Button
-            variant="contained"
-            endIcon={<FileUploadIcon />}
-            onClick={handleFileUploadToMongo}
-          >
-            {isLoading ? "....Uploading" : "Upload Files"}
-          </Button>
-        </Stack>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => setData(undefined)}
+            >
+              Remove Selected Files
+            </Button>
+            <Button
+              variant="contained"
+              endIcon={<FileUploadIcon />}
+              onClick={handleFileUploadToMongo}
+            >
+              {isLoading ? "....Uploading" : "Upload Files"}
+            </Button>
+          </Stack>
+        ) : null}
       </>
     )
   );

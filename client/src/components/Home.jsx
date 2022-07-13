@@ -6,9 +6,8 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { useEffect } from "react";
 import { gapi } from "gapi-script";
 
-export const Home = ({ setData }) => {
+export const Home = ({ setData, setIsLoggedIn, isLoggedin }) => {
   const [openPicker] = useDrivePicker();
-  const [isLoggedin, setIsLoggedIn] = useState(false);
 
   const handleOpenDrive = () => {
     openPicker({

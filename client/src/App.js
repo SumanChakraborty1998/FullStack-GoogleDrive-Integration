@@ -5,11 +5,16 @@ import { Home } from "./components/Home";
 
 function App() {
   const [data, setData] = useState(undefined);
+  const [isLoggedin, setIsLoggedIn] = useState(false);
 
   return (
     <div className="App">
-      <Home setData={setData} />
-      <DisplayTable data={data} setData={setData} />
+      <Home
+        setData={setData}
+        isLoggedin={isLoggedin}
+        setIsLoggedIn={setIsLoggedIn}
+      />
+      <DisplayTable data={data} setData={setData} isLoggedin={isLoggedin} />
     </div>
   );
 }
