@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { gapi } from "gapi-script";
 
 export const Home = ({ setData }) => {
-  const [openPicker, authResponse] = useDrivePicker();
+  const [openPicker] = useDrivePicker();
   const [isLoggedin, setIsLoggedIn] = useState(false);
 
   const handleOpenDrive = () => {
@@ -66,7 +66,7 @@ export const Home = ({ setData }) => {
             clientId={process.env.REACT_APP_CLIENT_ID}
             buttonText="Logout - Google Drive"
             icon={true}
-            // isSignedIn={true}
+            isSignedIn={true}
             onLogoutSuccess={(res) => logoutSuccess(res)}
           />
         ) : (
@@ -77,13 +77,15 @@ export const Home = ({ setData }) => {
             onSuccess={(res) => successResponseFromGoogle(res)}
             onFailure={(res) => failureResponseFromGoogle(res)}
             // cookiePolicy={"single_host_origin"}
-            isSignedIn={false}
+            isSignedIn={true}
           />
         )}
 
-        <Button variant="outlined" onClick={handleOpenDrive}>
-          Select File from Google Drive
-        </Button>
+        {isLoggedin && (
+          <Button variant="outlined" onClick={handleOpenDrive}>
+            Select File from Google Drive
+          </Button>
+        )}
       </Stack>
     </div>
   );

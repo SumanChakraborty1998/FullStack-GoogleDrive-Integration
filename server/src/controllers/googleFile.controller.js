@@ -24,7 +24,7 @@ router.post("/save", async (req, res) => {
     type: req.body.type,
     url: req.body.url,
   });
-  return res.status(201).json({ sucess: true, data: data });
+  return res.status(201).json({ success: true, data: data });
 });
 
 module.exports = router;

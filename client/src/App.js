@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Home setData={setData} />
-      <DisplayTable data={data} />
+      <DisplayTable data={data} setData={setData} />
     </div>
   );
 }
